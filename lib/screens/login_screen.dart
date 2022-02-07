@@ -6,7 +6,8 @@ class LoginScreen extends StatelessWidget {
   final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
 
   final Map<String, String> formvalues = {
-    'email'  : '',
+    'email'     : '',
+    'password'  : '',
   };
 
   LoginScreen({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class LoginScreen extends StatelessWidget {
 
                           const SizedBox(height: 20,),
 
-                          CustomInputField(formPropierty: 'Contraseña', formValues: formvalues, hintText: "Introduce tu contraseña", suffixicon: Icons.password_rounded, obscureText: true,),
+                          CustomInputField(formPropierty: 'password', formValues: formvalues, hintText: "Introduce tu contraseña", suffixicon: Icons.password_rounded, obscureText: true,),
 
                           const SizedBox(
                             height: 30,
@@ -52,7 +53,12 @@ class LoginScreen extends StatelessWidget {
                                   print('Formulario No valido');
                                   return;
                               }
-                              Navigator.pushNamed(context, 'home', arguments: {'email' : formvalues['email']});
+                              //Otra opcion es mandar un objeto
+                              Navigator.pushNamed(context, 'home', 
+                                arguments: {
+                                  'email' : formvalues['email'],
+                                  'password' : formvalues['password']}
+                              );
                             },
                             child: const Center(
                               child: Text('ENTRAR'),
