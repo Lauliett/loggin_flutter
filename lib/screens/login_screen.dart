@@ -25,13 +25,16 @@ class LoginScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Form(
+                    key: myFormKey,
                     child: Container(
                       width: double.infinity,
                       color: Colors.white,
                       child: Column(
                         children: [
+
                           const SizedBox(height: 10,),
-                          CustomInputField(formPropierty: 'email', formValues: formvalues, hintText: "Introduce tu email", suffixicon: Icons.email,),
+                          
+                          CustomInputField(formPropierty: 'email', formValues: formvalues, hintText: "Introduce tu email", suffixicon: Icons.email, keyboardType: TextInputType.emailAddress),
 
                           const SizedBox(height: 20,),
 
@@ -42,7 +45,14 @@ class LoginScreen extends StatelessWidget {
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, 'home', arguments: {'email' : "hola"});
+                              //Recordar: esto es para quitar el teclado de la pantalla!
+                              FocusScope.of(context).requestFocus( FocusNode() );
+              
+                              if ( !myFormKey.currentState!.validate() ){
+                                  print('Formulario No valido');
+                                  return;
+                              }
+                              Navigator.pushNamed(context, 'home', arguments: {'email' : formvalues['email']});
                             },
                             child: const Center(
                               child: Text('ENTRAR'),
@@ -75,3 +85,4 @@ class _BackgourndImage extends StatelessWidget {
     );
   }
 }
+
