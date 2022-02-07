@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Login firebase',
-      initialRoute: 'home',
+      initialRoute: 'login',
       routes: {
-        'login' : ( BuildContext context ) => const LoginScreen(),
+        'login' : ( BuildContext context ) =>  const LoginScreen(),
         'home' : ( BuildContext context ) =>  HomeScreen(),
       },
     );
