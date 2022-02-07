@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:loggin_flutter/widgets/custom_input.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+
+  final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
+
+  final Map<String, String> formvalues = {
+    'email'  : '',
+  };
+
+  LoginScreen({Key? key}) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -21,37 +30,13 @@ class LoginScreen extends StatelessWidget {
                       color: Colors.white,
                       child: Column(
                         children: [
-                          TextFormField(
-                            keyboardType: TextInputType.emailAddress,
-                            decoration: const InputDecoration(
-                              labelText: "Email",
-                              hintText: "Introduce tu email",
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.green)),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.pink),
-                              ),
-                              labelStyle: TextStyle(color: Colors.grey),
-                              suffixIcon: Icon(Icons.email),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          TextFormField(
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                              labelText: "Contraseña",
-                              hintText: "Introduce tu contraseña",
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.green)),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.pink),
-                              ),
-                              labelStyle: TextStyle(color: Colors.grey),
-                              suffixIcon: Icon(Icons.password_rounded),
-                            ),
-                          ),
+                          const SizedBox(height: 10,),
+                          CustomInputField(formPropierty: 'email', formValues: formvalues, hintText: "Introduce tu email", suffixicon: Icons.email,),
+
+                          const SizedBox(height: 20,),
+
+                          CustomInputField(formPropierty: 'Contraseña', formValues: formvalues, hintText: "Introduce tu contraseña", suffixicon: Icons.password_rounded, obscureText: true,),
+
                           const SizedBox(
                             height: 30,
                           ),
@@ -61,10 +46,6 @@ class LoginScreen extends StatelessWidget {
                             },
                             child: const Center(
                               child: Text('ENTRAR'),
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all<Color>(Colors.pink),
                             ),
                           )
                         ],
