@@ -12,19 +12,19 @@ class HomeScreen extends StatelessWidget {
     //final String email = arguments['email'];
     //final String password = arguments['password'];
     final userLogin = ModalRoute.of(context)!.settings.arguments as UserLogin;
-    
+
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            
             Text("Holi " + userLogin.getEmail()),
             Text("Tu contraseña es: " + userLogin.getPassword()),
             const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, 'login');
+                Navigator.pop(context);
+                //Navigator.(context, 'login');
               },
               child: const Text('VOLVER'),
             )
