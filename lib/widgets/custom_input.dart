@@ -53,6 +53,7 @@ class CustomInputField extends StatelessWidget {
         helperText: helperText,
 
         suffixIcon: Icon( suffixicon ),
+
         icon: icon == null ? null : Icon (icon),
       ),
     );

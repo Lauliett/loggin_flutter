@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:loggin_flutter/model/user_login.dart';
 import 'package:loggin_flutter/widgets/custom_input.dart';
 
 class LoginScreen extends StatelessWidget {
-
   final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
 
   final Map<String, String> formvalues = {
-    'email'     : '',
-    'password'  : '',
+    'email': '',
+    'password': '',
   };
 
   LoginScreen({Key? key}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -32,33 +31,53 @@ class LoginScreen extends StatelessWidget {
                       color: Colors.white,
                       child: Column(
                         children: [
-
-                          const SizedBox(height: 10,),
-                          
-                          CustomInputField(formPropierty: 'email', formValues: formvalues, hintText: "Introduce tu email", suffixicon: Icons.email, keyboardType: TextInputType.emailAddress),
-
-                          const SizedBox(height: 20,),
-
-                          CustomInputField(formPropierty: 'password', formValues: formvalues, hintText: "Introduce tu contraseña", suffixicon: Icons.password_rounded, obscureText: true,),
-
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          CustomInputField(
+                              formPropierty: 'email',
+                              formValues: formvalues,
+                              hintText: "Introduce tu email",
+                              suffixicon: Icons.email,
+                              keyboardType: TextInputType.emailAddress),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          CustomInputField(
+                            formPropierty: 'password',
+                            formValues: formvalues,
+                            hintText: "Introduce tu contraseña",
+                            suffixicon: Icons.lock_outline_rounded,
+                            obscureText: true,
+                          ),
                           const SizedBox(
                             height: 30,
                           ),
                           ElevatedButton(
                             onPressed: () {
                               //Recordar: esto es para quitar el teclado de la pantalla!
-                              FocusScope.of(context).requestFocus( FocusNode() );
-              
-                              if ( !myFormKey.currentState!.validate() ){
-                                  print('Formulario No valido');
-                                  return;
+                              FocusScope.of(context).requestFocus(FocusNode());
+
+                              if (!myFormKey.currentState!.validate()) {
+                                print('Formulario No valido');
+                                return;
                               }
                               //Otra opcion es mandar un objeto
-                              Navigator.pushNamed(context, 'home', 
-                                arguments: {
-                                  'email' : formvalues['email'],
-                                  'password' : formvalues['password']}
-                              );
+                              UserLogin userLogin = UserLogin(
+                                  (formvalues['email'] == null)
+                                      ? ""
+                                      : formvalues['email']!,
+                                  (formvalues['password'] == null)
+                                      ? ""
+                                      : formvalues['password']!);
+                              
+                              Navigator.pushNamed(context, 'home', arguments: userLogin);
+
+                              /*
+                              Navigator.pushNamed(context, 'home', arguments: {
+                                'email': formvalues['email'],
+                                'password': formvalues['password']
+                              });*/
                             },
                             child: const Center(
                               child: Text('ENTRAR'),
@@ -91,4 +110,3 @@ class _BackgourndImage extends StatelessWidget {
     );
   }
 }
-
